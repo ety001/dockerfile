@@ -1,0 +1,80 @@
+{
+  "chain_id": "3505e367fe6cde243f2a1c39bd8e58557e23271dd6cbf4b29a8dc8c44c9af8fe",
+  "my_accounts": [{
+      "id": "1.2.2720",
+      "uid": 243326852,
+      "name": "yoyo243326852",
+      "owner": {
+        "weight_threshold": 1,
+        "account_uid_auths": [],
+        "key_auths": [[
+            "YYW6rrGX3GME69pKZk5fQkZrBCZ9RniADhi2sYddnoV9i5afvvhW3",
+            1
+          ]
+        ]
+      },
+      "active": {
+        "weight_threshold": 1,
+        "account_uid_auths": [],
+        "key_auths": [[
+            "YYW6JYvFM6sfQJVpoMgu6VUgbHLZFDDMG84ZkseRWC3F4sFBTEaii",
+            1
+          ]
+        ]
+      },
+      "secondary": {
+        "weight_threshold": 1,
+        "account_uid_auths": [],
+        "key_auths": [[
+            "YYW7yMTRemjfe3WdRtyW3purxeXfu1PCSuw2gXHFZWqAtMXBmrAdg",
+            1
+          ]
+        ]
+      },
+      "memo_key": "YYW5HYEEpqNdrrZ7dsnHpNxxiPAQrTSnXFPefQU1hN799hHknvq2P",
+      "reg_info": {
+        "registrar": 206336051,
+        "referrer": 25997,
+        "registrar_percent": 0,
+        "referrer_percent": 0,
+        "allowance_per_article": {
+          "amount": 0,
+          "asset_id": 0
+        },
+        "max_share_per_article": {
+          "amount": 0,
+          "asset_id": 0
+        },
+        "max_share_total": {
+          "amount": 0,
+          "asset_id": 0
+        },
+        "buyout_percent": 10000
+      },
+      "can_post": true,
+      "can_reply": false,
+      "can_rate": false,
+      "is_full_member": false,
+      "is_registrar": false,
+      "is_admin": false,
+      "create_time": "2018-06-24T00:51:21",
+      "last_update_time": "2018-06-24T00:51:21",
+      "active_data": "{}",
+      "secondary_data": "{}",
+      "statistics": "2.4.2720"
+    }
+  ],
+  "cipher_keys": "65f97e3add74969a9d6adc9d55f8f71372fc7246bd2341f8834f70739d2277bf4126986392104c1edb7d00fc9ae761dd29a4e93521770075369fd7090bcfe6c8ffb323ff9d48995ac183d4aff195d2f63c663d59d646c3b554d5e1757c79cb651ed6a3ed4dd57fc0d2a521588ec64b318c8567f8bc3bcbe6c48a263b867d2f42fcc436f4e61dab720be9aaac0873cf5ed3311a40854f151d286c772843bc7f72",
+  "extra_keys": [[
+      243326852,[
+        "YYW6JYvFM6sfQJVpoMgu6VUgbHLZFDDMG84ZkseRWC3F4sFBTEaii"
+      ]
+    ]
+  ],
+  "pending_account_registrations": [],
+  "pending_witness_registrations": [],
+  "labeled_keys": [],
+  "ws_server": "ws://47.52.155.181:10011",
+  "ws_user": "",
+  "ws_password": ""
+}
