@@ -46,6 +46,7 @@ RUN \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    locale-gen en_US.UTF-8 && \
     pip3 install gcovr
 
 RUN \
