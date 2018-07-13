@@ -9,6 +9,7 @@ ENV LANG=en_US.UTF-8
 RUN \
     apt-get update && \
     apt-get install -y \
+        locales \
         autoconf \
         automake \
         autotools-dev \
