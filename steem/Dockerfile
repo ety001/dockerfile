@@ -2,6 +2,7 @@ FROM ubuntu:16.04
 
 ARG STEEM_STATIC_BUILD=ON
 ENV STEEM_STATIC_BUILD ${STEEM_STATIC_BUILD}
+ARG steemd_version=stable
 
 ENV LANG=en_US.UTF-8
 
@@ -49,6 +50,7 @@ RUN \
 RUN \
     git clone https://github.com/steemit/steem.git /usr/local/src/steem && \
     cd /usr/local/src/steem && \
+    git checkout ${steemd_version} && \
     git submodule update --init --recursive && \
     mkdir build && \
     cd build && \
