@@ -1,9 +1,8 @@
-FROM alpine:3.6
+FROM alpine:3.9
 # composer
-ENV COMPOSER_VERSION 1.6.5
+ENV COMPOSER_VERSION 1.8.4
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV PATH ${PATH}:/root/.composer/vendor/bin
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 # php
 RUN apk --no-cache add curl php7 php7-pdo_mysql php7-pcntl php7-common \
@@ -16,6 +15,4 @@ RUN apk --no-cache add curl php7 php7-pdo_mysql php7-pcntl php7-common \
   sed -ri 's/^nobody:x:99:20:/nobody:x:65534:65534:/' /etc/passwd && \
   sed -ri 's/nogroup:x:65533:/nogroup:x:65534:/' /etc/group && \
   curl -L https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar > /usr/local/bin/composer && \
-  chmod +x /usr/local/bin/composer && \
-  # fix libiconv
-  apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
+  chmod +x /usr/local/bin/composer
