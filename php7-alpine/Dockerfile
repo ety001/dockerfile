@@ -15,4 +15,7 @@ RUN apk --no-cache add curl php7 php7-pdo_mysql php7-pcntl php7-common \
   sed -ri 's/^nobody:x:99:20:/nobody:x:65534:65534:/' /etc/passwd && \
   sed -ri 's/nogroup:x:65533:/nogroup:x:65534:/' /etc/group && \
   curl -L https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar > /usr/local/bin/composer && \
-  chmod +x /usr/local/bin/composer
+  chmod +x /usr/local/bin/composer && \
+  apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
+
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
