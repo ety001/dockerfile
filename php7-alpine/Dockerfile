@@ -22,4 +22,4 @@ RUN apk --no-cache add curl php7 php7-pdo_mysql php7-pcntl php7-common \
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-CMD ["php-fpm7 -F"]
+CMD ["php-fpm7", "-F"]
