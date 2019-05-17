@@ -1,0 +1,26 @@
+{
+  "name": "cors-any",
+  "version": "0.1.0",
+  "description": "A proxy to put in front of servers that don't support CORS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ety001/dockerfile"
+  },
+  "keywords": [
+    "cors",
+    "proxy"
+  ],
+  "author": "ETY001",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ety001/dockerfile/issues"
+  },
+  "homepage": "https://github.com/ety001/dockerfile",
+  "dependencies": {
+    "cors-anywhere": "^0.4.1"
+  }
+}
