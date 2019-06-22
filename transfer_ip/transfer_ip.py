@@ -6,18 +6,20 @@ env_dist = os.environ
 ip_url = env_dist.get('IP_URL')
 to_url = env_dist.get('TO_URL')
 if not to_url:
-    print('no to_url config')
+    print('no TO_URL config')
     exit(0)
+print(to_url)
 
 def main():
     tmp_ip = ''
+    if ip_url:
+        url = ip_url
+    else:
+        url = 'https://ifconfig.me'
+    print(url)
     while True:
-        # get ip
-        if ip_url:
-            url = ip_url
-        else:
-            url = 'https://ifconfig.me'
         try:
+            # get ip
             ip_addr = requests.get(url).text
             print(ip_addr)
             if ip_addr != tmp_ip:
