@@ -31,7 +31,7 @@ services:
     networks:
       esnet:
         ipv4_address: 172.22.0.3
-    command: /app/witness_node --data-dir /data_dir --rpc-endpoint "0.0.0.0:8090" --plugins "elasticsearch market_history grouped_orders" --elasticsearch-node-url "http://172.22.0.2:9200/" --es-objects-auth "elastic:changeme"
+    command: /app/witness_node --data-dir /data_dir --plugins "elasticsearch market_history grouped_orders" --elasticsearch-node-url "http://172.22.0.2:9200/" --es-objects-auth "elastic:changeme"
     restart: always
 volumes:
   esdata1:
