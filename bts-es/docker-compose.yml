@@ -37,8 +37,8 @@ services:
         ipv4_address: 172.22.0.3
   btscore:
     build: .
-    args:
-      TAG: master
+      args:
+        TAG: master
     volumes:
       - ./bts-data:/data_dir
     networks:
