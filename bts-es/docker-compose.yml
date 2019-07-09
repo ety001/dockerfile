@@ -16,7 +16,8 @@ services:
     ports:
       - 9200:9200
     networks:
-      - esnet
+      esnet:
+        ipv4_address: 172.22.0.2
   elasticsearch2:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.7.2
     container_name: elasticsearch2
@@ -32,8 +33,18 @@ services:
     volumes:
       - esdata2:/usr/share/elasticsearch/data
     networks:
-      - esnet
-
+      esnet:
+        ipv4_address: 172.22.0.3
+  btscore:
+    build: .
+    args:
+      TAG: master
+    volumes:
+      - ./bts-data:/data_dir
+    networks:
+      esnet:
+        ipv4_address: 172.22.0.4
+    command: /app/witness_node --data-dir /data_dir --rpc-endpoint "0.0.0.0:8090" --plugins "elasticsearch market_history grouped_orders" --elasticsearch-node-url "http://172.22.0.2:9200/"
 volumes:
   esdata1:
     driver: local
@@ -42,3 +53,7 @@ volumes:
 
 networks:
   esnet:
+    ipam:
+      config:
+        - subnet: 172.22.0.0/24
+          gateway: 172.22.0.1
