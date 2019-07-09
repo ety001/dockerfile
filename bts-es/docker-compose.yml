@@ -25,6 +25,8 @@ services:
         TAG: master
     volumes:
       - ./bts-data:/data_dir
+    depends_on:
+      - "elasticsearch"
     networks:
       esnet:
         ipv4_address: 172.22.0.3
