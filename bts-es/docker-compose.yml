@@ -36,7 +36,9 @@ services:
       esnet:
         ipv4_address: 172.22.0.3
   btscore:
-    build: .
+    build:
+      context: .
+      image: btscore
       args:
         TAG: master
     volumes:
