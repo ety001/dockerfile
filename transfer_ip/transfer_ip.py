@@ -20,7 +20,7 @@ def main():
     while True:
         try:
             # get ip
-            ip_addr = requests.get(url).text
+            ip_addr = requests.get(url).text.strip()
             print(ip_addr)
             if ip_addr != tmp_ip:
                 # send ip
