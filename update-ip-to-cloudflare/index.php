@@ -3,6 +3,7 @@ $email = getenv('EMAIL');
 $authkey = getenv('AUTH_KEY');
 $domain = $_GET['domain'] ? $_GET['domain'] : null; // example.com
 $record = $_GET['record'] ? $_GET['record'] : null; // sub.example.com
+$ipv6 = isset($_GET['ipv6']) ? true : false; // ipv6
 $ip = $_GET['ip'] ? $_GET['ip'] : null;
 // $ip = file_get_contents('https://api.ipify.org');
 
@@ -17,13 +18,23 @@ $headers = [
     'Content-Type: application/json'
 ];
 
-$data = [
-    'type' => 'A',
-    'name' => $record,
-    'content' => $ip,
-    'ttl' => 1,
-    'proxied' => false,
-];
+if ($ipv6) {
+    $data = [
+        'type' => 'AAAA',
+        'name' => $record,
+        'content' => $ip,
+        'ttl' => 1,
+        'proxied' => false,
+    ];
+} else {
+    $data = [
+        'type' => 'A',
+        'name' => $record,
+        'content' => $ip,
+        'ttl' => 1,
+        'proxied' => false,
+    ];
+}
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://api.cloudflare.com/client/v4/zones?name=$domain");
