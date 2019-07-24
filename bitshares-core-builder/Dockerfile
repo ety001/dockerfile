@@ -1,6 +1,5 @@
 FROM ubuntu:18.04
 WORKDIR /app
-COPY sources.list /etc/apt/sources.list
 ARG TAG=master
 #ARG http_proxy=http://192.168.199.84:8001/
 #ARG https_proxy=http://192.168.199.84:8001/
