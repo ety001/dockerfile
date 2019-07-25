@@ -13,4 +13,5 @@ EXPOSE 8090
 RUN apt-get update && apt-get -y install libcurl4-openssl-dev && apt-get -y clean
 COPY --from=0 /app/bitshares-core/programs/cli_wallet/cli_wallet .
 COPY --from=0 /app/bitshares-core/programs/witness_node/witness_node .
+STOPSIGNAL SIGINT
 CMD ["/app/witness_node", "--data-dir", "/data_dir"]
