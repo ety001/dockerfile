@@ -58,7 +58,7 @@ services:
     image: ety001/bts-core:3.3.2
     container_name: btscore
     volumes:
-      - btscore:/data_dir
+      - ./bts_data:/data_dir
     networks:
       esnet:
         ipv4_address: 172.22.0.4
@@ -68,8 +68,6 @@ volumes:
   esdata01:
     driver: local
   esdata02:
-    driver: local
-  btscore:
     driver: local
 
 networks:
