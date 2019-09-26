@@ -22,10 +22,11 @@ services:
         ipv4_address: 172.22.0.2
     restart: always
   btscore:
-    build:
-      context: .
-      args:
-        TAG: master
+    # build:
+    #   context: .
+    #   args:
+    #     TAG: master
+    image: ety001/bts-core:3.3.2
     volumes:
       - ./bts-data:/data_dir
     depends_on:
