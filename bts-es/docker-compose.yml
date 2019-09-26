@@ -10,6 +10,8 @@ services:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms3g -Xmx3g"
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=123456
     ulimits:
       memlock:
         soft: -1
@@ -32,6 +34,8 @@ services:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms3g -Xmx3g"
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=123456
     ulimits:
       memlock:
         soft: -1
@@ -42,10 +46,21 @@ services:
       esnet:
         ipv4_address: 172.22.0.3
     restart: always
+  btscore:
+    image: ety001/bts-core:3.3.2
+    volumes:
+      - btscore:/data_dir
+    networks:
+      esnet:
+        ipv4_address: 172.22.0.4
+    command: /app/witness_node --data-dir /data_dir --plugins "elasticsearch" --elasticsearch-node-url "http://172.22.0.2:9200/" --es-objects-auth "elastic:123456"
+    restart: always
 volumes:
   esdata01:
     driver: local
   esdata02:
+    driver: local
+  btscore:
     driver: local
 
 networks:
