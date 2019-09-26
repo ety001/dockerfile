@@ -56,6 +56,7 @@ services:
     restart: always
   btscore:
     image: ety001/bts-core:3.3.2
+    container_name: btscore
     volumes:
       - btscore:/data_dir
     networks:
