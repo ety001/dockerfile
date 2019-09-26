@@ -12,10 +12,12 @@ services:
       - "ES_JAVA_OPTS=-Xms3g -Xmx3g"
       - xpack.security.enabled=true
       - ELASTIC_PASSWORD=123456
+      - network.host=172.22.0.2
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile: "65535:65535"
     volumes:
       - esdata01:/usr/share/elasticsearch/data
     #ports:
@@ -36,10 +38,12 @@ services:
       - "ES_JAVA_OPTS=-Xms3g -Xmx3g"
       - xpack.security.enabled=true
       - ELASTIC_PASSWORD=123456
+      - network.host=172.22.0.3
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile: "65535:65535"
     volumes:
       - esdata02:/usr/share/elasticsearch/data
     networks:
