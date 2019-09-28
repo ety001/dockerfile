@@ -15,8 +15,8 @@ services:
       - network.host=0.0.0.0
       - xpack.security.transport.ssl.enabled=true
       - xpack.security.transport.ssl.verification_mode=certificate
-      - xpack.security.transport.ssl.keystore.path=/ssl/elastic-certificates.p12
-      - xpack.security.transport.ssl.truststore.path=/ssl/elastic-certificates.p12
+      - xpack.security.transport.ssl.keystore.path=certs/elastic-certificates.p12
+      - xpack.security.transport.ssl.truststore.path=certs/elastic-certificates.p12
     ulimits:
       memlock:
         soft: -1
@@ -26,7 +26,7 @@ services:
         hard: 65536
     volumes:
       - esdata01:/usr/share/elasticsearch/data
-      - ./ssl:/ssl
+      - ./ssl:/usr/share/elasticsearch/config/certs
     #ports:
     #  - 9200:9200
     networks:
@@ -48,8 +48,8 @@ services:
       - network.host=0.0.0.0
       - xpack.security.transport.ssl.enabled=true
       - xpack.security.transport.ssl.verification_mode=certificate
-      - xpack.security.transport.ssl.keystore.path=/ssl/elastic-certificates.p12
-      - xpack.security.transport.ssl.truststore.path=/ssl/elastic-certificates.p12
+      - xpack.security.transport.ssl.keystore.path=certs/elastic-certificates.p12
+      - xpack.security.transport.ssl.truststore.path=certs/elastic-certificates.p12
     ulimits:
       memlock:
         soft: -1
@@ -59,7 +59,7 @@ services:
         hard: 65536
     volumes:
       - esdata02:/usr/share/elasticsearch/data
-      - ./ssl:/ssl
+      - ./ssl:/usr/share/elasticsearch/config/certs
     networks:
       esnet:
         ipv4_address: 172.22.0.3
