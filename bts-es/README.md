@@ -83,6 +83,11 @@ into nginx network. And then nginx can proxy to `es01`.
 docker network connect --ip 172.20.0.3 lnmp es01
 ```
 
+## Anonymous account
+
+My es node url : [https://bts-es.liuye.tech](https://bts-es.liuye.tech)
+The anonymous account will be coming soon.
+
 ## Any question?
 
 Please be easy to commit an issue if you have any question.
