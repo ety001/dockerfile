@@ -44,8 +44,7 @@ ENTER ENTER ENTER
 $ sudo sysctl -w vm.max_map_count=262144
 ```
 
-To set this value permanently, update the `vm.max_map_count` setting
-
+To set this value permanently, update the `vm.max_map_count` setting  
 in `/etc/sysctl.conf`. To verify after rebooting, run `sysctl vm.max_map_count`.
 
 ### 5. Run
@@ -77,26 +76,22 @@ $ curl -u elastic:123456 -X GET 'http://172.22.0.2:9200/_cat/health'
 
 ### 4. Add es01 into nginx network
 
-If you have nginx which deployed by docker, you can add `es01` container
-
+If you have nginx which deployed by docker, you can add `es01` container  
 into nginx network. And then nginx can proxy to `es01`.
 
 > Assume that nginx container network's name is lnmp.
-
 ```
 docker network connect --ip 172.20.0.3 lnmp es01
 ```
 
 ## Anonymous account
 
-My es node url : [https://bts-es.liuye.tech](https://bts-es.liuye.tech).
-
+My es node url : [https://bts-es.liuye.tech](https://bts-es.liuye.tech).  
 The anonymous account will be coming soon.
 
 ## Any question?
 
 Please be easy to commit an issue if you have any question.
 
-My bitshares account: **ety001**
-
+My bitshares account: **ety001**  
 My witness account: **liuye**
