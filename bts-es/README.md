@@ -85,7 +85,8 @@ docker network connect --ip 172.20.0.3 lnmp es01
 
 ## Anonymous account
 
-My es node url : [https://bts-es.liuye.tech](https://bts-es.liuye.tech)
+My es node url : [https://bts-es.liuye.tech](https://bts-es.liuye.tech).
+
 The anonymous account will be coming soon.
 
 ## Any question?
