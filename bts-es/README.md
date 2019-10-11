@@ -13,9 +13,14 @@ $ cd dockerfile/bts-es
 
 * **ES_JAVA_OPTS=-Xms3g -Xmx3g** can edit your elastic memory usage.
 * **ELASTIC_PASSWORD** is your elastic password. Please edit `--elasticsearch-basic-auth` at the same time.
-* **#ports: - 9200:9200**, if you want to export http port directly, uncomment this.
+* **#ports: - 9200:9200**, if you want to export elastic search http port directly, uncomment this.
+* **#ports: - 5601:5601**, if you want to export kibana http port directly, uncomment this.
 
-### 3. Create certs
+### 3. Edit password of kibana
+
+Open `kibana.yml` file and edit the `elasticsearch.password` to the elastic search password.
+
+### 4. Create certs
 
 ```
 $ docker run \
@@ -38,7 +43,7 @@ ENTER ENTER ENTER
 # exit
 ```
 
-### 4. Increase the vm.max_map_count
+### 5. Increase the vm.max_map_count
 
 ```
 $ sudo sysctl -w vm.max_map_count=262144
@@ -47,7 +52,7 @@ $ sudo sysctl -w vm.max_map_count=262144
 To set this value permanently, update the `vm.max_map_count` setting  
 in `/etc/sysctl.conf`. To verify after rebooting, run `sysctl vm.max_map_count`.
 
-### 5. Run
+### 6. Run
 
 ```
 $ docker-compose up -d
