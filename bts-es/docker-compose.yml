@@ -75,6 +75,7 @@ services:
     command: /app/witness_node --data-dir /data_dir --plugins "elasticsearch" --elasticsearch-node-url "http://172.22.0.2:9200/" --elasticsearch-basic-auth "elastic:123456"
     restart: always
   kibana:
+    container_name: kibana
     image: docker.elastic.co/kibana/kibana:7.4.0
     environment:
       SERVER_NAME: kibana
