@@ -77,9 +77,6 @@ services:
   kibana:
     container_name: kibana
     image: docker.elastic.co/kibana/kibana:7.4.0
-    environment:
-      SERVER_NAME: kibana
-      ELASTICSEARCH_HOSTS: http://172.22.0.2:9200/
     volumes:
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml
     networks:
