@@ -74,6 +74,18 @@ services:
         ipv4_address: 172.22.0.4
     command: /app/witness_node --data-dir /data_dir --plugins "elasticsearch" --elasticsearch-node-url "http://172.22.0.2:9200/" --elasticsearch-basic-auth "elastic:123456"
     restart: always
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_HOSTS: http://172.22.0.2:9200/
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      esnet:
+        ipv4_address: 172.22.0.5
+    ports:
+      - 5601:5601
 volumes:
   esdata01:
     driver: local
