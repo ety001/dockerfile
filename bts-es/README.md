@@ -12,7 +12,7 @@ $ cd dockerfile/bts-es
 ### 2. Edit the docker-composer.yaml
 
 * **ES_JAVA_OPTS=-Xms3g -Xmx3g** can edit your elastic memory usage.
-* **ELASTIC_PASSWORD** is your elastic password. Please edit `--es-objects-auth` at the same time.
+* **ELASTIC_PASSWORD** is your elastic password. Please edit `--elasticsearch-basic-auth` at the same time.
 * **#ports: - 9200:9200**, if you want to export http port directly, uncomment this.
 
 ### 3. Create certs
