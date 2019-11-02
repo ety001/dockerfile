@@ -12,8 +12,8 @@ RUN apk --no-cache add curl php7 php7-pdo_mysql php7-pcntl php7-common \
   php7-gd php7-gettext php7-json php7-xml php7-iconv php7-curl php7-xmlreader \
   php7-pdo_pgsql php7-pgsql php7-mcrypt php7-dom php7-memcached php7-mysqli \
   php7-simplexml php7-phar php7-ctype php7-tokenizer php7-redis php7-gmp && \
-  echo "www:x:1000:1000:www:/:/sbin/nologin" >> /etc/passwd && \
-  echo "www:x:1000:" >> /etc/passwd && \
+  echo "www:x:1000:1000:www:/data/wwwroot:/sbin/nologin" >> /etc/passwd && \
+  echo "www:x:1000:" >> /etc/group && \
   sed -ri 's/127.0.0.1:9000/0.0.0.0:9000/' /etc/php7/php-fpm.d/www.conf && \
   sed -ri 's/;chdir\ =\ \/var\/www/chdir=\/data\/wwwroot/' /etc/php7/php-fpm.d/www.conf && \
   curl -L https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar > /usr/local/bin/composer && \
