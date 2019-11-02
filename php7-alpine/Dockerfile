@@ -21,6 +21,5 @@ RUN apk --no-cache add curl php7 php7-pdo_mysql php7-pcntl php7-common \
   apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-USER www
 
 CMD ["php-fpm7", "-F"]
