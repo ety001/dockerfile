@@ -1,7 +1,6 @@
 ## Project Page: https://github.com/ety001/docker-swoole
 FROM alpine:latest
 MAINTAINER ety001 <ety001@domyself.me>
-VOLUME /source
 RUN apk add --no-cache \
         php7 php7-openssl php7-sqlite3 php7-pear php7-pdo_mysql php7-pcntl \
         php7-common php7-xsl php7-fpm php7-mysqlnd php7-mbstring php7-mysqli \
