@@ -54,7 +54,14 @@ $ sudo sysctl -w vm.max_map_count=262144
 To set this value permanently, update the `vm.max_map_count` setting  
 in `/etc/sysctl.conf`. To verify after rebooting, run `sysctl vm.max_map_count`.
 
-### 6. Run
+### 6. Edit kibana password
+
+```
+$ vim kibana.yml
+```
+Please change `elasticsearch.password` to your password.
+
+### 7. Run
 
 ```
 $ docker-compose up -d
