@@ -67,7 +67,7 @@ Please change `elasticsearch.password` to your password.
 $ docker-compose up -d
 ```
 
-> If you use single node cluster, please run these commands to close sharp.
+> If you use single node cluster, please run these commands to set `number_of_replicas` to `0`.
 
 ```
 $ curl -u elastic:123456 -XPUT "http://127.0.0.1:9200/_template/default_template" -H 'Content-Type: application/json' -d'
