@@ -70,16 +70,14 @@ $ docker-compose up -d
 > If you use single node cluster, please run these commands to close sharp.
 
 ```
-$ docker exec -it es01 /bin/bash
-
--- GET IN CONTAINER --
-
-# vi config/elasticsearch.yml
-
--- Add this config and save --
-index.number_of_replicas: 0
-
-# exit
+$ curl -u elastic:123456 -XPUT "http://127.0.0.1:9200/_template/default_template" -H 'Content-Type: application/json' -d'
+{
+  "index_patterns": ["*"],
+  "settings": {
+    "number_of_replicas": 0
+  }
+}
+'
 ```
 
 ## Other Commands
