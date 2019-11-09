@@ -60,6 +60,21 @@ in `/etc/sysctl.conf`. To verify after rebooting, run `sysctl vm.max_map_count`.
 $ docker-compose up -d
 ```
 
+> If you use single node cluster, please run these commands to close sharp.
+
+```
+$ docker exec -it es01 /bin/bash
+
+-- GET IN CONTAINER --
+
+# vi config/elasticsearch.yml
+
+-- Add this config and save --
+index.number_of_replicas: 0
+
+# exit
+```
+
 ## Other Commands
 
 ### 1. Check logs
