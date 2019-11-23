@@ -24,7 +24,7 @@ def main():
             print(ip_addr)
             if ip_addr != tmp_ip:
                 # send ip
-                result = requests.get(to_url+ip_addr).text
+                result = requests.get(to_url+ip_addr, timeout=5).text
                 print(result)
                 tmp_ip = ip_addr
         except Exception as e:
