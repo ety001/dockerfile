@@ -1,3 +1,4 @@
 yoyow_test/yoyow_client
 yoyow_test/yoyow_node
-
+btfdd/bts_data/*
+!btfdd/bts_data/.gitkeep
