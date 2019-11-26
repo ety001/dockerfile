@@ -10,7 +10,7 @@ services:
     volumes:
       - ./bts_data:/data_dir
     networks:
-      esnet:
+      bts-testnet:
         ipv4_address: 172.25.0.2
     command: /app/witness_node --data-dir /data_dir --genesis-json /data_dir/genesis/my-genesis.json --seed-nodes "[]" --enable-stale-production
 networks:
