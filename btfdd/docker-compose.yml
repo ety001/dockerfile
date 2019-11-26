@@ -1,0 +1,21 @@
+version: '2.2'
+services:
+  bts-testnet:
+    # https://github.com/ety001/dockerfile/blob/master/bitshares-core-builder/Dockerfile.test
+    image: ety001/bts-core-testnet:4.0.2
+    container_name: bts-testnet
+    ports:
+      - 8090:8090
+    restart: always
+    volumes:
+      - ./bts_data:/data_dir
+    networks:
+      esnet:
+        ipv4_address: 172.25.0.2
+    command: /app/witness_node --data-dir /data_dir --genesis-json /data_dir/genesis/my-genesis.json --seed-nodes "[]" --enable-stale-production
+networks:
+  bts-testnet:
+    ipam:
+      config:
+        - subnet: 172.25.0.0/24
+          gateway: 172.25.0.1
