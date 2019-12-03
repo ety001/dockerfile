@@ -28,6 +28,7 @@ services:
      #- ./assets/custom:/assets/custom
 
     environment: 
+      - UCP_FIRST=FALSE
       - VIRTUAL_HOST=sip.xxx.cn
       - VIRTUAL_NETWORK=nginx-proxy
      ### If you want to connect to the SSL Enabled Container 
@@ -59,7 +60,7 @@ services:
      
     restart: always
     networks:
-      - proxy-tier
+      - freepbx-net
 
     ### These final lines are for Fail2ban. If you don't want, comment and also add ENABLE_FAIL2BAN=FALSE to your environment
     cap_add:
@@ -78,7 +79,7 @@ services:
       - MYSQL_USER=asterisk
       - MYSQL_PASSWORD=123456
     networks:
-      - proxy-tier
+      - freepbx-net
 
   freepbx-db-backup:
     container_name: freepbx-db-backup
@@ -100,10 +101,12 @@ services:
       - COMPRESSION=BZ
       - MD5=TRUE
     networks:
-      - proxy-tier
+      - freepbx-net
     restart: always
 
 networks:
-  proxy-tier:
-    external:
-      name: nginx-proxy
+  freepbx-net:
+    ipam:
+      config:
+        - subnet: 172.22.0.0/24
+          gateway: 172.22.0.1
