@@ -1,0 +1,4 @@
+# docker-python-bts
+A docker env for [python-bts](https://github.com/pch957/python-bts).
+
+You can use this docker image as your base image to run a bitshares python script.

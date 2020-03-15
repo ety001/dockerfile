@@ -1,0 +1,3 @@
+FROM ety001/python-bts:latest
+VOLUME /bts
+CMD ["/bts/run.sh"]
