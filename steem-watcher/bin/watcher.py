@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3 -u
 #encoding:UTF-8
 import json, os, sys, time
 from contextlib import suppress
@@ -69,6 +69,7 @@ def connect_db():
         sys.exit()
 
 def create_db():
+    print("start creating db")
     try:
         connection = pymysql.connect(
             host=mysql_host,
@@ -93,6 +94,7 @@ def create_db():
         connection.close()
 
 def create_table():
+    print("start creating table")
     try:
         connection = pymysql.connect(
             host=mysql_host,
@@ -135,49 +137,53 @@ def create_table():
         connection.close()
 
 def worker(start, end):
-    global s, b, watch_account, db_connection
-    print('start from {start} to {end}'.format(start=start, end=end))
-    # keep log
-    with db_connection.cursor() as cursor:
-        sql = "INSERT INTO `task_log` (`block_num`, `status`) VALUES "
-        data = []
-        for i in range(start, end+1):
-            data.append("(%s, 0)" % i)
-        sql = sql + ','.join(data)
-        # print(sql)
-        cursor.execute(sql)
-    db_connection.commit()
-    # get block
-    block_infos = s.get_blocks(range(start, end+1))
-    # print(block_infos)
-    sql = "INSERT INTO `account_create_log` (`op_type`, `block_num`, `creator`, `original_data`, `timestamp`) VALUES (%s, %s, %s, %s, %s)"
-    for block_info in block_infos:
-        timestamp = int(time.mktime(time.strptime(block_info['timestamp'], "%Y-%m-%dT%H:%M:%S")))
-        block_num = block_info['block_num']
-        transactions = block_info['transactions']
-        for trans in transactions:
-            operations = trans['operations']
-            for op in operations:
-                if op[0] == 'claim_account' and op[1]['creator'] == watch_account:
-                    # op_type 1 = claim_account
-                    with db_connection.cursor() as cursor:
-                        cursor.execute(sql, (1, block_num, op[1]['creator'], json.dump(op), timestamp))
-                    db_connection.commit()
-                if op[0] == 'create_claimed_account' and op[1]['creator'] == watch_account:
-                    # op_type 2 = create_claimed_account
-                    with db_connection.cursor() as cursor:
-                        cursor.execute(sql, (2, block_num, op[1]['creator'], json.dump(op), timestamp))
-                    db_connection.commit()
-                if op[0] == 'account_create' and op[1]['creator'] == watch_account:
-                    # op_type 3 = account_create
-                    with db_connection.cursor() as cursor:
-                        cursor.execute(sql, (3, block_num, op[1]['creator'], json.dump(op), timestamp))
-                    db_connection.commit()
-    # keep log
-    with db_connection.cursor() as cursor:
-        sql = "UPDATE `task_log` SET `status` = 1 where block_num >= %s and block_num <= %s" % (start, end)
-        cursor.execute(sql)
-    db_connection.commit()
+    try:
+        global s, b, watch_account, db_connection
+        print('start from {start} to {end}'.format(start=start, end=end))
+        # keep log
+        with db_connection.cursor() as cursor:
+            clear_sql = "DELETE FROM `task_log` WHERE `block_num` >= %s and `block_num` <= %s" % (start, end)
+            insert_sql = "INSERT INTO `task_log` (`block_num`, `status`) VALUES "
+            data = []
+            for i in range(start, end+1):
+                data.append("(%s, 0)" % i)
+            insert_sql = insert_sql + ','.join(data)
+            cursor.execute(clear_sql)
+            cursor.execute(insert_sql)
+        db_connection.commit()
+        # get block
+        block_infos = s.get_blocks(range(start, end+1))
+        # print(block_infos)
+        sql = "INSERT INTO `account_create_log` (`op_type`, `block_num`, `creator`, `original_data`, `timestamp`) VALUES (%s, %s, '%s', '%s', %s)"
+        for block_info in block_infos:
+            timestamp = int(time.mktime(time.strptime(block_info['timestamp'], "%Y-%m-%dT%H:%M:%S")))
+            block_num = block_info['block_num']
+            transactions = block_info['transactions']
+            for trans in transactions:
+                operations = trans['operations']
+                for op in operations:
+                    if op[0] == 'claim_account':
+                        # op_type 1 = claim_account
+                        with db_connection.cursor() as cursor:
+                            cursor.execute(sql % (1, block_num, op[1]['creator'], json.dumps(op), timestamp))
+                        db_connection.commit()
+                    if op[0] == 'create_claimed_account':
+                        # op_type 2 = create_claimed_account
+                        with db_connection.cursor() as cursor:
+                            cursor.execute(sql % (2, block_num, op[1]['creator'], json.dumps(op), timestamp))
+                        db_connection.commit()
+                    if op[0] == 'account_create':
+                        # op_type 3 = account_create
+                        with db_connection.cursor() as cursor:
+                            cursor.execute(sql % (3, block_num, op[1]['creator'], json.dumps(op), timestamp))
+                        db_connection.commit()
+        # keep log
+        with db_connection.cursor() as cursor:
+            sql = "UPDATE `task_log` SET `status` = 1 where `block_num` >= %s and `block_num` <= %s" % (start, end)
+            cursor.execute(sql)
+        db_connection.commit()
+    except:
+        print('error: from %s to %s' % (start, end), sys.exc_info())
 
 def run():
     global start_block_num
@@ -198,9 +204,18 @@ def run():
             start_block_num = end_block_num - 3
         if start_block_num >= end_block_num:
             continue
-        with futures.ThreadPoolExecutor(max_workers=worker_num) as executor:
-            executor.submit(worker, start_block_num, end_block_num)
-        start_block_num = end_block_num + 1
+        if end_block_num - start_block_num >= 50:
+            while start_block_num < end_block_num:
+                tmp_end_block_num = start_block_num + 50
+                if tmp_end_block_num > end_block_num:
+                    tmp_end_block_num = end_block_num
+                with futures.ThreadPoolExecutor(max_workers=worker_num) as executor:
+                    executor.submit(worker, start_block_num, tmp_end_block_num)
+                start_block_num = tmp_end_block_num + 1
+        else:
+            with futures.ThreadPoolExecutor(max_workers=worker_num) as executor:
+                executor.submit(worker, start_block_num, end_block_num)
+            start_block_num = end_block_num + 1
         #time.sleep(3)
 
 if __name__ == '__main__':
