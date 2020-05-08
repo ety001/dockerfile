@@ -150,7 +150,7 @@ def worker(start, end):
     # get block
     block_infos = s.get_blocks(range(start, end+1))
     # print(block_infos)
-    sql = "INSERT INTO `account_create_log` (`op_type`, `block_num`, `creator`, `original_data`, `timestamp`) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO `account_create_log` (`op_type`, `block_num`, `creator`, `original_data`, `timestamp`) VALUES (%s, %s, %s, %s, %s)"
     for block_info in block_infos:
         timestamp = int(time.mktime(time.strptime(block_info['timestamp'], "%Y-%m-%dT%H:%M:%S")))
         block_num = block_info['block_num']
