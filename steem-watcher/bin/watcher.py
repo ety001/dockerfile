@@ -6,7 +6,7 @@ from concurrent import futures
 from steem.blockchain import Blockchain
 from steem.steemd import Steemd
 import pymysql
-
+from lib import slack
 
 env_dist = os.environ
 steemd_url = env_dist.get('STEEMD')
@@ -185,6 +185,18 @@ def worker(start, end):
     except:
         print('error: from %s to %s' % (start, end), sys.exc_info())
 
+def get_start_num_from_db():
+    global db_connection
+    with db_connection.cursor() as cursor:
+        sql = "SELECT `block_num` FROM `task_log` ORDER BY `block_num` DESC LIMIT 1"
+        cursor.execute(sql)
+        log = cursor.fetchone()
+        print(log)
+    if log == None:
+        return 0
+    else:
+        return int(log['block_num']) + 1
+
 def run():
     global start_block_num
     steemd_nodes = [
@@ -196,6 +208,10 @@ def run():
     create_db()
     create_table()
     connect_db()
+
+    start_block_num_from_db = get_start_num_from_db()
+    if start_block_num_from_db != 0:
+        start_block_num = start_block_num_from_db
 
     while True:
         head_block_number = b.info()['head_block_number']
