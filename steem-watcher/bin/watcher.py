@@ -136,7 +136,6 @@ def create_table():
 
 def worker(start, end):
     global s, b, watch_account, db_connection
-    print(db_connection)
     print('start from {start} to {end}'.format(start=start, end=end))
     # keep log
     with db_connection.cursor() as cursor:
@@ -147,10 +146,7 @@ def worker(start, end):
         sql = sql + ','.join(data)
         # print(sql)
         cursor.execute(sql)
-    try:
-        db_connection.commit()
-    except:
-        print("error:", sys.exc_info())
+    db_connection.commit()
     # get block
     block_infos = s.get_blocks(range(start, end+1))
     # print(block_infos)
