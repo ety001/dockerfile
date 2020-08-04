@@ -28,7 +28,7 @@ Open `kibana.yml` file and edit the `elasticsearch.password` to the elastic sear
 $ docker run \
     -it --rm \
     -v $(pwd)/ssl:/usr/share/elasticsearch/config/certs \
-    docker.elastic.co/elasticsearch/elasticsearch:7.3.2 \
+    docker.elastic.co/elasticsearch/elasticsearch:7.6.0 \
     /bin/bash
 
 -- GET IN CONTAINER --
