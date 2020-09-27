@@ -1,7 +1,7 @@
-FROM alpine:3.7
+FROM ubuntu:18.04
 
 WORKDIR /data
 
-RUN apk add --no-cache axel
+RUN apt-get update -y && apt-get install -y axel ca-certificates && apt-get clean
 
 ENTRYPOINT ["axel"]
