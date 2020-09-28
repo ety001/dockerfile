@@ -10,14 +10,13 @@ RUN git clone https://github.com/bitshares/bitshares-core.git && \
     git checkout ${TAG} && \
     git submodule update --init --recursive && \
     cmake -DCMAKE_BUILD_TYPE=Release . && \
-    make -j16
+    make -j16 get_dev_key js_operation_serializer
 
 FROM ubuntu:18.04
 WORKDIR /app
 VOLUME /data_dir
 EXPOSE 8090
 RUN apt-get update && apt-get -y install libcurl4-openssl-dev && apt-get -y clean
-COPY --from=0 /app/bitshares-core/programs/cli_wallet/cli_wallet .
-COPY --from=0 /app/bitshares-core/programs/witness_node/witness_node .
-STOPSIGNAL SIGINT
-CMD ["/app/witness_node", "--data-dir", "/data_dir"]
+COPY --from=0 /app/bitshares-core/programs/* .
+
+CMD ["/bin/bash"]
