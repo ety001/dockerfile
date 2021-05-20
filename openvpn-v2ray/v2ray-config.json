@@ -1,0 +1,41 @@
+
+{
+  "inbounds" : [
+    {
+      "listen" : "127.0.0.1",
+      "protocol" : "socks",
+      "settings" : {
+        "ip" : "127.0.0.1",
+        "auth" : "noauth",
+        "udp" : false
+      },
+      "tag" : "socksinbound",
+      "port" : 1080
+    },
+    {
+      "listen" : "127.0.0.1",
+      "protocol" : "http",
+      "settings" : {
+        "timeout" : 0
+      },
+      "tag" : "httpinbound",
+      "port" : 8000
+    }
+  ],
+  "dns" : {
+    "servers" : [
+      "8.8.8.8",
+      "114.114.114.114"
+    ]
+  },
+  "log" : {
+    "error" : "/dev/stderr",
+    "loglevel" : "none",
+    "access" : "/dev/stdout"
+  },
+  "outbounds" : [
+    {
+      "protocol" : "freedom"
+    }
+  ]
+}
