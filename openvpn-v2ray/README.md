@@ -1,3 +1,5 @@
+openvpn登陆文件重命名为 `client.ovpn`
+
 ```
 docker run -itd --name vpn \
     --restart always \
@@ -6,6 +8,5 @@ docker run -itd --name vpn \
     -v $(pwd):/root \
     -p 1082:1080 \
     -p 8002:8000 \
-    ety001/openvpn-v2ray \
-    --config /root/client.ovpn --auth-nocache
+    ety001/openvpn-v2ray
 ```

@@ -2,7 +2,7 @@
 {
   "inbounds" : [
     {
-      "listen" : "127.0.0.1",
+      "listen" : "0.0.0.0",
       "protocol" : "socks",
       "settings" : {
         "ip" : "127.0.0.1",
@@ -13,7 +13,7 @@
       "port" : 1080
     },
     {
-      "listen" : "127.0.0.1",
+      "listen" : "0.0.0.0",
       "protocol" : "http",
       "settings" : {
         "timeout" : 0
