@@ -13,4 +13,6 @@ WORKDIR /git
 VOLUME /home/ety001
 VOLUME /git
 
+USER ety001
+
 CMD ["git"]
