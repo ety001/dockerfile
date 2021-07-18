@@ -1,6 +1,12 @@
+FROM alpine:latest as builder
+WORKDIR /tmp
+RUN apk --no-cache add go git
+RUN git clone https://github.com/nickw444/cf-ddns.git && \
+    cd cf-ddns && \
+    go build -o cf-ddns
+
 FROM alpine:latest
-RUN apk --no-cache add php7 php7-curl php7-json
-WORKDIR /app
-COPY index.php /app/index.php
-EXPOSE 80
-CMD ["php", "-S", "0.0.0.0:80", "-t", "/app"]
+COPY --from=builder /tmp/cf-ddns/cf-ddns /usr/bin/
+ADD run.sh /usr/bin/run.sh
+RUN apk --no-cache add curl
+CMD ["/usr/bin/run.sh"]
