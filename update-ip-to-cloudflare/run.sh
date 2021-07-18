@@ -8,8 +8,8 @@ do
         lastip=`cat $FILE`
     fi
     nowip=`curl -s ifconfig.so`
-    if [[ "$lastip" == "$nowip" ]]; then
-        echo "not need update
+    if [ "$lastip" = "$nowip" ]; then
+        echo "not need update"
     else
         cf-ddns \
             --cf-email=$CF_EMAIL \
