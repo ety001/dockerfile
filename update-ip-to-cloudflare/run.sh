@@ -7,7 +7,10 @@ do
     if [ -f $FILE ]; then
         lastip=`cat $FILE`
     fi
-    nowip=`curl -s ifconfig.so`
+    if [ -z $CHECK_IP_URL ];then
+        CHECK_IP_URL=ifconfig.co
+    fi
+    nowip=`curl -s $CHECK_IP_URL`
     if [ "$lastip" = "$nowip" ]; then
         echo "not need update"
     else
