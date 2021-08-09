@@ -72,12 +72,7 @@ services:
     networks:
       esnet:
         ipv4_address: 172.22.0.4
-    command: /app/witness_node --data-dir /data_dir \
-        --plugins "elasticsearch es_objects" \
-        --elasticsearch-node-url "http://172.22.0.2:9200/" \
-        --elasticsearch-basic-auth "elastic:123456" \
-        --es-objects-elasticsearch-url "http://172.22.0.2:9200/" \
-        --es-objects-auth "elastic:123456"
+    command: /app/witness_node --data-dir /data_dir --plugins "elasticsearch es_objects" --elasticsearch-node-url "http://172.22.0.2:9200/" --elasticsearch-basic-auth "elastic:123456" --es-objects-elasticsearch-url "http://172.22.0.2:9200/" --es-objects-auth "elastic:123456"
     restart: always
   kibana:
     container_name: kibana
