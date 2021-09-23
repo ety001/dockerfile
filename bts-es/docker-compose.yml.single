@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
     container_name: es01
     environment:
       - node.name=es01
@@ -44,7 +44,7 @@ services:
     restart: always
   kibana:
     container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.16.0
+    image: docker.elastic.co/kibana/kibana:7.15.0
     volumes:
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml
     networks:
